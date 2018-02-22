@@ -175,6 +175,8 @@
 
             var visibleRows = renderableRows.filter(function (row) { return row.visible; });
             grid.options.totalItems = visibleRows.length;
+            //create filter change event which will force totalItems to be upto date with filtering
+            grid.api.core.on.rowsVisibleChanged();
 
             var firstRow = publicApi.methods.pagination.getFirstRowIndex();
             var lastRow  = publicApi.methods.pagination.getLastRowIndex();
@@ -403,7 +405,7 @@
 
           var options = uiGridCtrl.grid.options;
 
-          
+
           uiGridCtrl.grid.renderContainers.body.registerViewportAdjuster(function (adjustment) {
             if (options.enablePaginationControls) {
               adjustment.height = adjustment.height - gridUtil.elementHeight($elm, "padding");
